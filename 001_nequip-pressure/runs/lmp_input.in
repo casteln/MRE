@@ -1,0 +1,38 @@
+# Zn/N 
+units           metal
+
+## Boundary condition
+dimension       3
+boundary        p p p
+
+newton off
+
+# Create geometry from a structure file
+atom_style      atomic
+read_data       atoms.lmp
+
+change_box      all triclinic
+
+
+# Apply NequIP potentials
+pair_style	nequip
+pair_coeff	* * model.pth C  H  N  Zn
+
+
+# Same neighbours code than in pair_nequip test
+neighbor	    1.0 bin
+neigh_modify    delay 0 every 1 check no
+
+
+timestep        0.0005
+thermo          10
+thermo_style    custom step time pe ke etotal evdwl ecoul enthalpy temp press vol density cella cellb cellc cellalpha cellbeta cellgamma pxx pyy pzz pxy pxz pyz
+thermo_modify   format float %15.14g
+
+log             log.run
+fix             4  all  nvt temp  300  300  0.1
+run             200000 
+unfix 4
+
+
+
