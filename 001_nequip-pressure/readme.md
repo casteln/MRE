@@ -1,6 +1,9 @@
 # Issue
 
-<!-- Add  Link to github issue -->
+When running NVT trajectories of the same system and NequIP model (learned with stress) with ASE and LAMMPS, I get different average results for the pressure.
+I find a systematic shift of roughly 200 MPa, with the pressure outputted by LAMMPS always higher.
+
+[Link to github discussion](https://github.com/mir-group/nequip/discussions/345)
 
 # MD runs
 
