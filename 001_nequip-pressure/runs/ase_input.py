@@ -131,7 +131,7 @@ if __name__ == "__main__":
     nvtq = 500
 
     # number of steps
-    nsteps = 200000
+    nsteps = 100000
 
     #output file name
     out = "output"

@@ -8,7 +8,7 @@ I find a systematic shift of roughly 200 MPa, with the pressure outputted by LAM
 # MD runs
 
 In the `runs` folder. 
-Two example runs of 10 ps NVT trajectories at 300 K of the same system (`atom`) with the same MLP (`model.pth`))
+Two example runs of 50 ps NVT trajectories at 300 K of the same system (`atom`) with the same MLP (`model.pth`))
 Result still holds for 100 ps with better averaging.
 
 In both cases, I used e3nn=0.5.1 and pytorch=1.10.1 (also tested with 1.13.0)
@@ -63,3 +63,23 @@ The fluctuations are shown on `results/Pressure(step).pdf`
 
 This was also observed with other MLPs, thermostat damping constants, system volumes, with a systematic shift of roughly 2000 bars as shown on
 `results/Other_systems.png`.
+
+# Answer
+
+## New run for Kinetic term 
+
+Created a new run to try LAMMPS without adding the kinetic term.
+
+Input: `run/lmp_input_no_kinetic_term.in`
+
+Results: `results/plot_pressure_lmp_no_kinetic_term.py`
+
+```
+Average pressure with LAMMPS: %s 2187.8091421470276
+Average pressure with LAMMPS - no kinetic term: %s -361.4262667274463
+Average pressure with ASE: %s -354.6579018371563
+```
+
+## Conclusion
+
+The difference comes from the kinetic term, see [the github discussion](https://github.com/mir-group/nequip/discussions/345) for more details.

@@ -23,15 +23,16 @@ pair_coeff	* * model.pth C  H  N  Zn
 neighbor	    1.0 bin
 neigh_modify    delay 0 every 1 check no
 
+compute stress all pressure NULL virial  # NULL means without temperature contribution
 
 timestep        0.0005
 thermo          10
-thermo_style    custom step time pe ke etotal evdwl ecoul enthalpy temp press vol density cella cellb cellc cellalpha cellbeta cellgamma pxx pyy pzz pxy pxz pyz
+thermo_style    custom step time press pxx pyy pzz pxy pxz pyz c_stress[*]
 thermo_modify   format float %15.14g
 
 log             log.run
 fix             4  all  nvt temp  300  300  0.1
-run             100000 
+run             200000 
 unfix 4
 
 
